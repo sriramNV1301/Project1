@@ -7,6 +7,9 @@ from nltk.tokenize import word_tokenize
 r = sr.Recognizer()
 nouns = []
 verbs = []
+skybox = []
+terrain = []
+objects = []
 
 def speechInput():
     myMic = sr.Microphone(device_index=1) 
@@ -32,6 +35,16 @@ def textVerbs(POStags):
         if i[1] == 'VBG':
             verbs.append(i[0])
 
+def skyBox(tags):
+    for i in tags:
+        if i[0] == 'night' or i[0] == 'day' or i[0] == 'evening' or i[0] == 'morning' or i[0] == 'afternoon':
+            skybox.append(i[0])
+
+def terra(tags):
+    for i in tags:
+        if i[0] == "road" or i[0] == "field" or i[0] == "beach" or i[0] == "monuntain" or i[0] == "sea":
+            terrain.append(i[0])
+
 audio = speechInput()
 tags = speechToText(audio)
 textNouns(tags)
@@ -46,4 +59,13 @@ for i in nouns:
 print("Verbs: ")
 for i in verbs:
     print(i+" ")
+
+print("Skybox: ")
+for i in skybox:
+    print(i+" ")
+print("terrain: ")
+for i in terrain:
+    print(i+" ")
+    
+    
 
